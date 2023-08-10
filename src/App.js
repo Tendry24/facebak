@@ -3,7 +3,7 @@ import {
     createBrowserRouter,
     RouterProvider
 } from "react-router-dom";
-import NavBar from './component/navBar/navBar';
+import NavBar from './component/NavBar/NavBar';
 import MainLayout from "./component/MainLayout";
 import {Box, Flex} from "@chakra-ui/react";
 import React from "react";
