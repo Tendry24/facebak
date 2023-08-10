@@ -1,5 +1,6 @@
 import React from 'react'
 import {Box, Flex} from "@chakra-ui/react";
+import NewsFeed from "./components/NewsFeed/NewsFeed";
 
 const Home = () => {
     return (
@@ -10,13 +11,7 @@ const Home = () => {
             width={"100%"}
             h={"100%"}
         >
-            <Box
-                border={"2px"}
-                height={"100%"}
-                w={"75%"}
-            >
-                Newsfeed
-            </Box>
+            <NewsFeed/>
             <Box
                 border={"2px"}
                 height={"100%"}
