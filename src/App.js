@@ -8,6 +8,7 @@ import MainLayout from "./component/MainLayout";
 import {Box, Flex} from "@chakra-ui/react";
 import React from "react";
 import LeftSider from "./component/LeftSider/LeftSider";
+import SimpleSidebar from './component/LeftSider/LeftSider';
 
 
 
@@ -25,7 +26,7 @@ function App() {
                 w={"full"}
                 marginTop={"60px"}
             >
-                <LeftSider/>
+                <SimpleSidebar/>
                 <MainLayout/>
             </Flex>
         </Box>
