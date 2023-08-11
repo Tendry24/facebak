@@ -1,4 +1,4 @@
-import { Flex, IconButton, Text } from "@chakra-ui/react";
+import { Flex, IconButton, Heading } from "@chakra-ui/react";
 import React from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { Input } from "@chakra-ui/react";
@@ -10,8 +10,7 @@ const ContactMenu = () => {
             justifyContent={"space-evenly"}
             alignItems={"center"}
             width={"100%"}>
-            <Text
-                width={"40%"}>Contact</Text>          
+            <Heading size={"sm"} width={"40%"}>Contact</Heading>
             <Input width={"40%"}/>
             <IconButton icon={
                 <BiSearchAlt

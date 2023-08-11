@@ -1,14 +1,18 @@
-import { Divider, Flex } from "@chakra-ui/react";
+import { Divider, Flex, Spinner } from "@chakra-ui/react";
 import React from "react";
 import UserRepresentation from "./UserRepresentation";
 import ContactMenu from "./ContactMenu";
 
 const ListeUser = () => {
-    const [listePerson, addInListePerson] = useListeUser([
+    const [listePerson, setListePerson, addInListePerson] = useListeUser([
         {name:"Tendry Axel", isOnLine:true},
         {name:"tendry"},
         {name:"kirisaki"},
     ]);
+
+    React.useEffect(() => {
+        fetchUser(setListePerson)
+    }, []);
 
     return (
         <Flex
@@ -22,6 +26,7 @@ const ListeUser = () => {
             <ContactMenu />
             <Divider color="blue.500" size="lg" />
             {listePerson.map(person=><UserRepresentation person={person}/>)}
+            {listePerson.length == 0 ? (<Spinner margin={"auto"}/>) :(<></>)}
         </Flex>
     )
 };
@@ -33,8 +38,18 @@ function useListeUser (arg) {
         setListePerson([...listePerson, user])
     };
 
-    return [listePerson, add]
+    return [listePerson, setListePerson, add]
 
+};
+
+const fetchUser = async (setListePerson) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8080/users');
+      const data = await response.json();
+      setListePerson(data);
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 export default ListeUser;
