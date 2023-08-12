@@ -26,19 +26,27 @@ import {BsThreeDotsVertical} from "react-icons/bs";
 import {BiLike, BiShare, BiChat} from "react-icons/bi";
 import {colors} from "../../../../common/colors";
 import CommentsModal from "./CommentsModal";
+import {getUserById} from "../../../../services/fetcher";
 
 const PostCard = ({
+    title,
     authorId,
-    authorProfilePic,
     date,
     content,
     likes,
+    postId,
     comments,
     imageSrc,
     isLoaded
 }) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [isAuthorLoaded, setIsAuthorLoaded] = useState(false);
+    const [author, setAuthor] = useState("");
+    getUserById(authorId).then((res) => {
+        setAuthor(res.data);
+        setIsAuthorLoaded(true);
+    }).catch(e => console.log(e))
+
     return (
         <>
             <Card
@@ -52,7 +60,7 @@ const PostCard = ({
                     <Flex spacing='4'>
                         <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
                             <SkeletonCircle size={"50px"} isLoaded={isAuthorLoaded}>
-                                <Avatar src={authorProfilePic} />
+                                <Avatar src={author.photo} name={author.username} />
                             </SkeletonCircle>
                             <SkeletonText
                                 noOfLines={2}
@@ -61,7 +69,7 @@ const PostCard = ({
                                 isLoaded={isAuthorLoaded}
                             >
                                 <Box>
-                                    <Heading size='sm'></Heading>
+                                    <Heading size='sm'>{author.username}</Heading>
                                     <Text color={colors.hex.gray}>{date}</Text>
                                 </Box>
                             </SkeletonText>
@@ -75,6 +83,7 @@ const PostCard = ({
                     </Flex>
                 </CardHeader>
                 <CardBody>
+                    {title && <Heading size={"md"} my={3}>{title}</Heading>}
                     <SkeletonText
                         noOfLines={3}
                         spacing={2}
@@ -163,7 +172,7 @@ const PostCard = ({
                     </Skeleton>
                 </CardFooter>
             </Card>
-            <CommentsModal isOpen={isOpen} onClose={onClose}/>
+            <CommentsModal postId={postId} isOpen={isOpen} onClose={onClose}/>
         </>
     )
 }
