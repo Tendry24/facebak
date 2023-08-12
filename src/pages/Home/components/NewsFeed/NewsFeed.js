@@ -6,10 +6,8 @@ import {getAllPosts} from "../../../../services/fetcher";
 const NewsFeed = () => {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
-        getAllPosts().then((data) => {
-            setPosts(data.data);
-            console.log(posts);
-            console.log("data fetched");
+        getAllPosts().then((res) => {
+            setPosts(res.data);
         })
     }, []);
     return (
