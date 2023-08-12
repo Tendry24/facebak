@@ -9,7 +9,6 @@ const MoreSection = () => {
             flexDirection={"column"}
             justifyContent={"space-evenly"}
             height={"100%"}>
-            <AboutMe />
             <ListeUser />
         </Flex>
     )
