@@ -19,32 +19,25 @@ import {
     WrapItem
   } from '@chakra-ui/react'
   import {
-    FiHome,
     FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
-    FiMenu,
     FiMessageSquare
   } from 'react-icons/fi'
 
   import{
     FaUserFriends,
-    FaVideo
+    FaPager
+    
   }from 'react-icons/fa'
   import {
     BiSolidGroup,
     BiSolidVideos
   }from 'react-icons/bi'
-  import {
-    VideoSettings
-  } from 'react-icons/md'
   
 
 
   const LinkItems = [
     { name: 'friends', icon: FaUserFriends },
-    { name: 'Files', icon: FiTrendingUp },
+    { name: 'Pages', icon: FaPager },
     { name: 'Groups', icon: BiSolidGroup },
     { name: 'Videos', icon: BiSolidVideos },
     { name: 'Messages', icon: FiMessageSquare },
