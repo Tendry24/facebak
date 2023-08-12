@@ -1,6 +1,7 @@
 import React, {createContext, useState} from 'react'
 import {Box, Flex} from "@chakra-ui/react";
 import NewsFeed from "./components/NewsFeed/NewsFeed";
+import MoreSection from './components/MoreSection/MoreSection';
 
 const Home = () => {
     return (
@@ -11,15 +12,9 @@ const Home = () => {
                 width={"100%"}
                 h={"100%"}
             >
-                <NewsFeed/>
-                <Box
-                    border={"2px"}
-                    height={"100%"}
-                    w={"25%"}
-                >
-                    More
-                </Box>
-            </Flex>
+            <MoreSection />
+            </Box>
+        </Flex>
     )
 }
 export default Home;
