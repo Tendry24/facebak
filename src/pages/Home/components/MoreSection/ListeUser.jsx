@@ -9,7 +9,7 @@ const ListeUser = () => {
     const [listePerson, setListePerson, addInListePerson] = useListeUser([]);
 
     React.useEffect(() => {
-        // fetchUser(setListePerson)
+        fetchUser(setListePerson)
     }, []);
 
     return (
