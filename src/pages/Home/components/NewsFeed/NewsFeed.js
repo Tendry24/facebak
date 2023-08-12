@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Box, Flex} from "@chakra-ui/react";
 import PostCard from "../PostCard/PostCard";
-import {PostContext} from "../../Home";
 import {getAllPosts} from "../../../../services/fetcher";
 
 const NewsFeed = () => {
