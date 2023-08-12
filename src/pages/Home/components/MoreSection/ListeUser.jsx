@@ -3,23 +3,20 @@ import React from "react";
 import UserRepresentation from "./UserRepresentation";
 import ContactMenu from "./ContactMenu";
 import axios from "axios";
+import { TbMoodEmpty } from "react-icons/tb";
 
 const ListeUser = () => {
-    const [listePerson, setListePerson, addInListePerson] = useListeUser([
-        {name:"Tendry Axel", isOnLine:true},
-        {name:"tendry"},
-        {name:"kirisaki"},
-    ]);
+    const [listePerson, setListePerson, addInListePerson] = useListeUser([]);
 
     React.useEffect(() => {
-        fetchUser(setListePerson)
+        // fetchUser(setListePerson)
     }, []);
 
     return (
         <Flex
             flexDir={"column"}
             overflow={"auto"}
-            alignItems={"start"}
+            alignItems={"center"}
             height={"100%"}
             padding={"5px"}
             margin={"5px"}
@@ -27,7 +24,7 @@ const ListeUser = () => {
             <ContactMenu />
             <Divider color="blue.500" size="lg" />
             {listePerson.map((person, index)=><UserRepresentation key={`${index}-person`} person={person}/>)}
-            {listePerson.length == 0 ? (<Spinner margin={"auto"}/>) :(<></>)}
+            {listePerson.length == 0 ? (<TbMoodEmpty fontSize={"4em"} />) :(<></>)}
         </Flex>
     )
 };

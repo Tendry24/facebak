@@ -13,7 +13,6 @@ const Home = () => {
                 h={"100%"}
             >
             <MoreSection />
-            </Box>
         </Flex>
     )
 }
