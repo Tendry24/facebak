@@ -67,7 +67,7 @@ export default LeftSider;*/
 export default function SimpleSidebar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
-      <Box minH="90vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+      <Box minH="90vh">
         <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
         <Drawer
           isOpen={isOpen}
@@ -81,7 +81,6 @@ export default function SimpleSidebar() {
           </DrawerContent>
         </Drawer>
         {/* mobilenav */}
-        <const display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
         <Box ml={{ base: 0, md: 60 }} p="4">
           {/* Content */}
         </Box>
@@ -93,8 +92,6 @@ export default function SimpleSidebar() {
     return (
       <Box
         bg={useColorModeValue('white', 'gray.900')}
-        borderRight="1px"
-        borderRightColor={useColorModeValue('gray.200', 'gray.700')}
         w={{ base: 'full', md: 60 }}
         pos="fixed"
         h="full"
