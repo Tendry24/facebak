@@ -9,10 +9,12 @@ const NewsFeed = () => {
         getAllPosts().then((res) => {
             setPosts(res.data);
         })
+            .then(e => console.log(e))
+            .catch(e => console.log(e));
+        console.log(posts)
     }, []);
     return (
         <Flex
-            border={"2px"}
             height={"100%"}
             w={"75%"}
             flexDir={"column"}
@@ -20,10 +22,12 @@ const NewsFeed = () => {
             alignItems={"center"}
         >
             {
-                posts ?
+                posts.length ?
                     posts.map((e, i) => (
                         <PostCard
-                            author={e.userId}
+                            title={e.title}
+                            authorId={e.userId}
+                            postId={e.id}
                             content={e.content}
                             date={e.updatedAt}
                             key={i}

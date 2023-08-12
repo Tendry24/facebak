@@ -14,7 +14,6 @@ const MainLayout = () => {
     return (
         <Flex
             w={"75%"}
-            border={"1px"}
             h={"100%"}
             justifyContent={"center"}
             alignItems={"center"}
