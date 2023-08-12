@@ -1,8 +1,20 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import {Box, Flex} from "@chakra-ui/react";
 import PostCard from "../PostCard/PostCard";
+import {PostContext} from "../../Home";
+import {getAllPosts} from "../../../../services/fetcher";
 
 const NewsFeed = () => {
+    const {posts, setPosts} = useContext(PostContext);
+    useEffect(() => {
+        getAllPosts().then((data) => {
+            if(posts.length === 0 && data) {
+                setPosts(data.data);
+                console.log(posts);
+                console.log("data fetched");
+            }
+        })
+    }, []);
     return (
         <Flex
             border={"2px"}
@@ -12,22 +24,18 @@ const NewsFeed = () => {
             overflow={"auto"}
             alignItems={"center"}
         >
-            <PostCard
-                author={"Kirisaki VK"}
-                content={"Test Component"}
-                date={"Today"}
-                comments={"15"}
-                likes={"60"}
-                imageSrc={"https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"}
-                isLoaded
-            />
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
+            {
+                posts ?
+                    posts.map((e, i) => (
+                        <PostCard
+                            author={e.userId}
+                            content={e.content}
+                            date={e.updatedAt}
+                            key={i}
+                            isLoaded
+                        />
+                    )) : <PostCard/>
+            }
         </Flex>
     )
 }
