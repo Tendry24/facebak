@@ -25,6 +25,7 @@ import {
 
   import{
     FaUserFriends,
+    FaPager
     
   }from 'react-icons/fa'
   import {
@@ -36,7 +37,7 @@ import {
 
   const LinkItems = [
     { name: 'friends', icon: FaUserFriends },
-    { name: 'Files', icon: FiTrendingUp },
+    { name: 'Pages', icon: FaPager },
     { name: 'Groups', icon: BiSolidGroup },
     { name: 'Videos', icon: BiSolidVideos },
     { name: 'Messages', icon: FiMessageSquare },
