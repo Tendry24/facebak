@@ -16,7 +16,7 @@ const UserRepresentation = ({person}) => {
                 transition={"1s"}
                 padding={"2px"}>
                     
-                <Avatar name={person.name} height={"2em"} width={"2em"} > 
+                <Avatar src={person.photo} name={person.name} height={"2em"} width={"2em"} >
                     <AvatarBadge boxSize={"1em"} bg={person.isOnLine ? "green" : "gray"} translate="10px" />
                 </Avatar>
                 <Text w={"full"} textAlign={"center"} alignItems={"center"} justifyContent={"center"} padding={"10px"}>{person.name}</Text>
