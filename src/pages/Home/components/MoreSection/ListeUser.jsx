@@ -25,7 +25,7 @@ const ListeUser = () => {
             gap={"8px"}>
             <ContactMenu />
             <Divider color="blue.500" size="lg" />
-            {listePerson.map(person=><UserRepresentation person={person}/>)}
+            {listePerson.map((person, index)=><UserRepresentation key={`${index}-person`} person={person}/>)}
             {listePerson.length == 0 ? (<Spinner margin={"auto"}/>) :(<></>)}
         </Flex>
     )
@@ -46,6 +46,10 @@ const fetchUser = async (setListePerson) => {
     try {
       const response = await fetch('http://127.0.0.1:8080/users');
       const data = await response.json();
+      for (const person of data) {
+        person["name"] = person["username"];
+        person["isOnLine"] = true;
+      };
       setListePerson(data);
     } catch (error) {
         console.error(error);
