@@ -4,12 +4,16 @@ import UserRepresentation from "./UserRepresentation";
 import ContactMenu from "./ContactMenu";
 import axios from "axios";
 import { TbMoodEmpty } from "react-icons/tb";
+import { getAllUsers } from "../../../../services/fetcher";
 
 const ListeUser = () => {
     const [listePerson, setListePerson, addInListePerson] = useListeUser([]);
 
     React.useEffect(() => {
-        fetchUser(setListePerson)
+        getAllUsers()
+            .then(result=>{
+                setListePerson(result.data);
+            })
     }, []);
 
     return (
@@ -23,7 +27,10 @@ const ListeUser = () => {
             gap={"8px"}>
             <ContactMenu />
             <Divider color="blue.500" size="lg" />
-            {listePerson.map((person, index)=><UserRepresentation key={`${index}-person`} person={person}/>)}
+            {listePerson.map((person, index)=>{
+                person.name = person.username;
+                return <UserRepresentation key={`${index}-person`} person={person}/>
+            })}
             {listePerson.length == 0 ? (<TbMoodEmpty fontSize={"4em"} />) :(<></>)}
         </Flex>
     )
@@ -38,20 +45,6 @@ function useListeUser (arg) {
 
     return [listePerson, setListePerson, add]
 
-};
-
-const fetchUser = async (setListePerson) => {
-    try {
-      const response = await axios.get('http://127.0.0.1:8080/users');
-      const reponse = await response.data;
-      for (const person of reponse) {
-        person["name"] = person["username"];
-        person["isOnLine"] = true;
-      };
-      setListePerson(reponse);
-    } catch (error) {
-        console.error(error);
-    }
 };
 
 export default ListeUser;
