@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Card,
     CardHeader,
@@ -28,7 +28,7 @@ import {colors} from "../../../../common/colors";
 import CommentsModal from "./CommentsModal";
 
 const PostCard = ({
-    author,
+    authorId,
     authorProfilePic,
     date,
     content,
@@ -38,7 +38,7 @@ const PostCard = ({
     isLoaded
 }) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
-
+    const [isAuthorLoaded, setIsAuthorLoaded] = useState(false);
     return (
         <>
             <Card
@@ -51,17 +51,17 @@ const PostCard = ({
                 <CardHeader>
                     <Flex spacing='4'>
                         <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                            <SkeletonCircle size={"50px"} isLoaded={isLoaded}>
-                                <Avatar name={author} src={authorProfilePic} />
+                            <SkeletonCircle size={"50px"} isLoaded={isAuthorLoaded}>
+                                <Avatar src={authorProfilePic} />
                             </SkeletonCircle>
                             <SkeletonText
                                 noOfLines={2}
                                 spacing={2}
                                 skeletonHeight={4}
-                                isLoaded={isLoaded}
+                                isLoaded={isAuthorLoaded}
                             >
                                 <Box>
-                                    <Heading size='sm'>{author}</Heading>
+                                    <Heading size='sm'></Heading>
                                     <Text color={colors.hex.gray}>{date}</Text>
                                 </Box>
                             </SkeletonText>
