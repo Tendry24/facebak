@@ -10,11 +10,22 @@ import {
     Heading,
     IconButton,
     Button,
-    Text, Badge, Image, Skeleton, SkeletonCircle, SkeletonText
+    Text,
+    Badge,
+    Image,
+    Skeleton,
+    SkeletonCircle,
+    SkeletonText,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalHeader,
+    ModalContent, ModalBody, ModalFooter, InputGroup, InputLeftElement, Input, InputRightElement
 } from "@chakra-ui/react";
 import {BsThreeDotsVertical} from "react-icons/bs";
 import {BiLike, BiShare, BiChat} from "react-icons/bi";
 import {colors} from "../../../../common/colors";
+import CommentsModal from "./CommentsModal";
 
 const PostCard = ({
     author,
@@ -25,11 +36,17 @@ const PostCard = ({
     comments,
     imageSrc,
     isLoaded
-                  }) => {
+}) => {
+    const {isOpen, onOpen, onClose} = useDisclosure();
+
     return (
+        <>
             <Card
                 w={"95%"}
                 m={"2"}
+                borderWidth={"2px"}
+                borderRadius={"lg"}
+                borderColor={colors.hex.light}
             >
                 <CardHeader>
                     <Flex spacing='4'>
@@ -85,8 +102,9 @@ const PostCard = ({
                     </Skeleton>
                 }
                 <CardFooter
-                    justify='space-between'
-                    flexWrap='wrap'
+                    justify='center'
+                    gap={4}
+                    flexWrap='nowrap'
                     sx={{
                         '& > button': {
                             minW: '136px',
@@ -95,10 +113,10 @@ const PostCard = ({
                 >
                     <Skeleton
                         borderRadius={"md"}
-                        w={"30%"}
+                        w={"48%"}
                         isLoaded={isLoaded}
                     >
-                        <Button w={"100%"} flex='1' variant='ghost' leftIcon={
+                        <Button w={"100%"} flex='1' variant='ghost' bgColor={colors.hex.light} leftIcon={
                             <Flex
                                 flexDir={"row"}
                                 flexWrap={"nowrap"}
@@ -119,10 +137,10 @@ const PostCard = ({
                     </Skeleton>
                     <Skeleton
                         borderRadius={"md"}
-                        w={"30%"}
+                        w={"48%"}
                         isLoaded={isLoaded}
                     >
-                        <Button w={"100%"} flex='1' variant='ghost' leftIcon={
+                        <Button w={"100%"} flex='1' variant='ghost' bgColor={colors.hex.light} leftIcon={
                             <Flex
                                 flexDir={"row"}
                                 flexWrap={"nowrap"}
@@ -137,21 +155,16 @@ const PostCard = ({
                                 }
                                 <BiChat/>
                             </Flex>
-                        }>
+                        }
+                            onClick={onOpen}
+                        >
                             Comment
-                        </Button>
-                    </Skeleton>
-                    <Skeleton
-                        borderRadius={"md"}
-                        w={"30%"}
-                        isLoaded={isLoaded}
-                    >
-                        <Button w={"100%"} flex='1' variant='ghost' leftIcon={<BiShare />}>
-                            Share
                         </Button>
                     </Skeleton>
                 </CardFooter>
             </Card>
+            <CommentsModal isOpen={isOpen} onClose={onClose}/>
+        </>
     )
 }
 export default PostCard
