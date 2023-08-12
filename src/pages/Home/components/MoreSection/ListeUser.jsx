@@ -2,6 +2,7 @@ import { Divider, Flex, Spinner } from "@chakra-ui/react";
 import React from "react";
 import UserRepresentation from "./UserRepresentation";
 import ContactMenu from "./ContactMenu";
+import axios from "axios";
 
 const ListeUser = () => {
     const [listePerson, setListePerson, addInListePerson] = useListeUser([
@@ -44,13 +45,13 @@ function useListeUser (arg) {
 
 const fetchUser = async (setListePerson) => {
     try {
-      const response = await fetch('http://127.0.0.1:8080/users');
-      const data = await response.json();
-      for (const person of data) {
+      const response = await axios.get('http://127.0.0.1:8080/users');
+      const reponse = await response.data;
+      for (const person of reponse) {
         person["name"] = person["username"];
         person["isOnLine"] = true;
       };
-      setListePerson(data);
+      setListePerson(reponse);
     } catch (error) {
         console.error(error);
     }
