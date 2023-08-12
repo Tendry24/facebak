@@ -1,18 +1,16 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Box, Flex} from "@chakra-ui/react";
 import PostCard from "../PostCard/PostCard";
 import {PostContext} from "../../Home";
 import {getAllPosts} from "../../../../services/fetcher";
 
 const NewsFeed = () => {
-    const {posts, setPosts} = useContext(PostContext);
+    const [posts, setPosts] = useState([]);
     useEffect(() => {
         getAllPosts().then((data) => {
-            if(posts.length === 0 && data) {
-                setPosts(data.data);
-                console.log(posts);
-                console.log("data fetched");
-            }
+            setPosts(data.data);
+            console.log(posts);
+            console.log("data fetched");
         })
     }, []);
     return (
