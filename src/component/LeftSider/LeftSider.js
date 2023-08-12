@@ -19,26 +19,18 @@ import {
     WrapItem
   } from '@chakra-ui/react'
   import {
-    FiHome,
     FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
-    FiMenu,
     FiMessageSquare
   } from 'react-icons/fi'
 
   import{
     FaUserFriends,
-    FaVideo
+    
   }from 'react-icons/fa'
   import {
     BiSolidGroup,
     BiSolidVideos
   }from 'react-icons/bi'
-  import {
-    VideoSettings
-  } from 'react-icons/md'
   
 
 
