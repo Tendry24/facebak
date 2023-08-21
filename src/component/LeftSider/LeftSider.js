@@ -98,7 +98,7 @@ export default function SimpleSidebar() {
         </Wrap>
 
         <Heading  fontSize={"xl"} fontWeight="bold">
-            Kirisaki_Vk
+            Kirisaki_VK
         </Heading>
 
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />

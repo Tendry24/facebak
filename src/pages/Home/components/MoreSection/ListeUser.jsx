@@ -14,6 +14,9 @@ const ListeUser = () => {
             .then(result=>{
                 setListePerson(result.data);
             })
+            .catch(e => {
+                console.log(e);
+            })
     }, []);
 
     return (

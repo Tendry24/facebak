@@ -5,7 +5,7 @@ const fetch = axios.create({
 });
 
 const getAllUsers = async () => {
-    return await fetch.get("/users")
+    return await fetch.get("/users");
 }
 
 const getAllPosts = async () => {
@@ -13,10 +13,17 @@ const getAllPosts = async () => {
 }
 
 const getUserById = async (id) => {
-    return await fetch.get(`/user/${id}`)
+    return await fetch.get(`/users/${id}`)
 }
+
+const getPostComments = async (postId) => {
+    return await fetch.get(`/posts/${postId}/comments`)
+}
+
 
 export {
     getAllPosts,
-    getAllUsers
+    getAllUsers,
+    getUserById,
+    getPostComments
 }
