@@ -5,6 +5,7 @@ import ContactMenu from "./ContactMenu";
 import axios from "axios";
 import { TbMoodEmpty } from "react-icons/tb";
 import { getAllUsers } from "../../../../services/fetcher";
+import { colors } from "../../../../common/colors";
 
 const ListeUser = () => {
     const [listePerson, setListePerson, addInListePerson] = useListeUser([]);
@@ -31,7 +32,7 @@ const ListeUser = () => {
                 person.name = person.username;
                 return <UserRepresentation key={`${index}-person`} person={person}/>
             })}
-            {listePerson.length == 0 ? (<TbMoodEmpty fontSize={"4em"} />) :(<></>)}
+            {listePerson.length == 0 ? (<TbMoodEmpty fontSize={"4em"} color={colors.rgba.dark(.5)} />) :(<></>)}
         </Flex>
     )
 };
