@@ -2,11 +2,16 @@ import React from 'react'
 import {Flex} from "@chakra-ui/react";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "../pages/Home/Home";
+import SignIn from '../pages/SignIn/SignIn';
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Home/>
+    },
+    {
+        path: "/signIn",
+        element: <SignIn/>
     }
 ])
 
