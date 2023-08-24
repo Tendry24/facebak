@@ -6,15 +6,10 @@ import {
     Flex,
     Icon,
     useColorModeValue,
-    Text,
     Drawer,
     DrawerContent,
     useDisclosure,
-    BoxProps,
-    FlexProps,
     Avatar, 
-    AvatarBadge,
-    AvatarGroup,
     Wrap,
     WrapItem
   } from '@chakra-ui/react'
