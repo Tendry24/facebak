@@ -27,6 +27,7 @@ import {
     BiSolidGroup,
     BiSolidVideos
   }from 'react-icons/bi'
+import {StorageProvider} from "../../services/storage";
   
 
 
@@ -77,6 +78,7 @@ export default function SimpleSidebar() {
   }
   
   const SidebarContent = ({ onClose, ...rest }) => {
+    const self = StorageProvider.getItem("self")
     return (
       <Box
         bg={useColorModeValue('white', 'gray.900')}
@@ -88,12 +90,12 @@ export default function SimpleSidebar() {
         
         <Wrap>
           <WrapItem>
-            <Avatar name='K_V' src='' />
+            <Avatar name={self.username} src={self.photo} />
           </WrapItem>
         </Wrap>
 
         <Heading  fontSize={"xl"} fontWeight="bold">
-            Kirisaki_VK
+            {self.username}
         </Heading>
 
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />

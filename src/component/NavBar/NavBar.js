@@ -8,8 +8,10 @@ import {
 } from "@chakra-ui/react";
 import SearchBar from "./SearchBar";
 import UserInfo from "./UserInfo";
+import {StorageProvider} from "../../services/storage";
 
 const NavBar = () => {
+    const self = StorageProvider.getItem("self");
     return(
         <Flex
             justifyContent={"space-between"}
@@ -26,7 +28,7 @@ const NavBar = () => {
                 <Heading size={"md"}>Facebak</Heading>
             </Box>
             <SearchBar/>
-            <UserInfo username={"Kirisaki VK"} isActive/>
+            <UserInfo username={self.username} src={self.photo} isActive/>
         </Flex>
     )
 }
