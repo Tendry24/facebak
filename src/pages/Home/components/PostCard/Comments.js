@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Avatar, Box, Flex, Heading, Skeleton, SkeletonCircle, SkeletonText, Text} from "@chakra-ui/react";
 import {BsFillCircleFill} from "react-icons/bs";
 import {colors} from "../../../../common/colors";
-import {getUserById} from "../../../../services/fetcher";
 
 const Comments = ({
     isLoaded,
@@ -19,6 +18,7 @@ const Comments = ({
                 borderWidth={"2px"}
                 borderRadius={"md"}
                 padding={4}
+                margin={2}
             >
                 <Skeleton
                     isLoaded={isLoaded}
