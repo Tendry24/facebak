@@ -4,9 +4,9 @@ import {
     useColorModeValue
   } from '@chakra-ui/react'
 
-import SignInForm from "./components/form/SignInForm"
+import SignUpForm from "./SignUpForm"
 
-const SignIn = () => {
+const SignUp = () => {
     return (
     <Flex
         w={'full'}
@@ -24,10 +24,10 @@ const SignIn = () => {
         p={6}
         my={12}
         transition={"all 1s"}>
-        <SignInForm />
+        <SignUpForm />
       </Stack>
     </Flex>
   )
 }
 
-export default SignIn;
+export default SignUp;

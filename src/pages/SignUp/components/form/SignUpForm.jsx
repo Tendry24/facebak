@@ -10,9 +10,9 @@ import {
 import { useState } from 'react';
 
 import { BsFillSendCheckFill } from "react-icons/bs"
-import SignInInput from './SignInInput';
+import SignUpInput from './SignUpInput';
 
-const SignInForm = () => {
+const SignUpForm = () => {
     const [userName, setUserName, modifyUserName, clearUserName] = useInput("");
     const [email, setEmail, modifyEmail, clearEmail] = useInput("");
     const [password, setPassword, modifyPassword, clearPassword] = useInput("");
@@ -35,21 +35,21 @@ const SignInForm = () => {
             { !send ?
                 (
                     <Stack>
-                        <SignInInput
+                        <SignUpInput
                             id="userName"
                             label="User name"
                             onChange={modifyUserName}
                             placeholder="UserName"
                             type="text"
                             value={userName}/>
-                        <SignInInput
+                        <SignUpInput
                             id="email"
                             label="Email address"
                             onChange={modifyEmail}
                             placeholder="facebak@example.com"
                             type="email"
                             value={email}/>
-                        <SignInInput
+                        <SignUpInput
                             id="password"
                             label="Password"
                             onChange={modifyPassword}
@@ -115,4 +115,4 @@ function useInput (init) {
     return [Input, setInput, modifyInput, clearInput]
 };
 
-export default SignInForm;
+export default SignUpForm;

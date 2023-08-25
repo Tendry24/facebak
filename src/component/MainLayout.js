@@ -2,7 +2,7 @@ import React from 'react'
 import {Flex} from "@chakra-ui/react";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "../pages/Home/Home";
-import SignIn from '../pages/SignIn/SignIn';
+import SignUp from '../pages/SignUp/components/form/SignUpLayout';
 
 const router = createBrowserRouter([
     {
@@ -10,8 +10,8 @@ const router = createBrowserRouter([
         element: <Home/>
     },
     {
-        path: "/signIn",
-        element: <SignIn/>
+        path: "/signUp",
+        element: <SignUp/>
     }
 ])
 

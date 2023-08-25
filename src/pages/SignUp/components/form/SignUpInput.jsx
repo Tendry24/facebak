@@ -4,7 +4,7 @@ import {
     Input
   } from '@chakra-ui/react'
 
-const SignInInput = ({id, label, placeholder, type, value ,onChange}) => {
+const SignUpInput = ({id, label, placeholder, type, value ,onChange}) => {
     return (
         <FormControl id={id} isRequired>
             <FormLabel>{label}</FormLabel>
@@ -19,4 +19,4 @@ const SignInInput = ({id, label, placeholder, type, value ,onChange}) => {
     )
 };
 
-export default SignInInput;
+export default SignUpInput;
