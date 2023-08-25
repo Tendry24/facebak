@@ -1,34 +1,44 @@
 import React, {useEffect, useState} from 'react'
 import {
     Avatar, Box, Button, Flex,
-    Heading, Input,
+    Heading,
     InputGroup,
-    InputLeftElement, InputRightElement, Modal,
+    InputRightElement, Modal,
     ModalBody, ModalCloseButton,
     ModalContent,
     ModalFooter,
     ModalHeader,
-    ModalOverlay, Skeleton, SkeletonCircle, SkeletonText, Text, Textarea, useBoolean
+    ModalOverlay, Textarea, useBoolean
 } from "@chakra-ui/react";
 import {colors} from "../../../../common/colors";
 import {IoSend, IoClose} from "react-icons/io5";
-import {getPostComments} from "../../../../services/fetcher";
-import {BiCircle} from "react-icons/bi";
-import {BsFillCircleFill} from "react-icons/bs";
+import {getPostComments, postComments} from "../../../../services/fetcher";
 import Comments from "./Comments";
 
-const CommentsModal = ({isOpen, onClose, postId}) => {
+const CommentsModal = ({isOpen, onClose, postId, self}) => {
+    const [selfState, setSelfState] = useState(null);
     const [comments, setComments] = useState([]);
     const [commentIsLoaded, {on}] = useBoolean(false);
+    const [tempComment, setTempComment] = useState("");
+
+
     useEffect(() => {
         getPostComments(postId)
             .then(res => {
                 setComments(res.data);
                 on();
-                console.log(comments)
             })
-            .catch(e => console.log(e))
+            .catch(e => console.log(e));
+        setSelfState(self);
+        console.log(selfState);
     }, []);
+
+    function sendComment() {
+        postComments(postId, self.id, tempComment).then((res) => {
+            setComments(prev => [...prev, res.data])
+            setTempComment("");
+        }).catch(e=> console.log(e))
+    }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} motionPreset={"scale"} isCentered>
@@ -70,7 +80,7 @@ const CommentsModal = ({isOpen, onClose, postId}) => {
                             borderColor={"black"}
                             mb={4}
                         >
-                            <Avatar name={"Kirisaki_VK"} size={"sm"}/>
+                            <Avatar name={selfState.username} src={selfState.photo} size={"sm"}/>
                         </Box>
                         <InputGroup
                             mb={4}
@@ -79,6 +89,11 @@ const CommentsModal = ({isOpen, onClose, postId}) => {
                                 placeholder={"Write your comments here"}
                                 resize={"none"}
                                 rows={1}
+                                value={tempComment}
+                                onChange={(event) => {
+                                    const value = event.target.value;
+                                    setTempComment(value);
+                                }}
                             />
                             <InputRightElement
                                 w={"fit-content"}
@@ -86,6 +101,7 @@ const CommentsModal = ({isOpen, onClose, postId}) => {
                             >
                                 <Button
                                     size={"sm"}
+                                    onClick={sendComment}
                                 >
                                     <IoSend/>
                                 </Button>

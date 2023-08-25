@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
     Card,
     CardHeader,
@@ -16,36 +16,57 @@ import {
     Skeleton,
     SkeletonCircle,
     SkeletonText,
-    useDisclosure,
-    Modal,
-    ModalOverlay,
-    ModalHeader,
-    ModalContent, ModalBody, ModalFooter, InputGroup, InputLeftElement, Input, InputRightElement
+    useDisclosure
 } from "@chakra-ui/react";
 import {BsThreeDotsVertical} from "react-icons/bs";
-import {BiLike, BiShare, BiChat} from "react-icons/bi";
+import {BiLike, BiChat} from "react-icons/bi";
 import {colors} from "../../../../common/colors";
 import CommentsModal from "./CommentsModal";
-import {getUserById} from "../../../../services/fetcher";
+import {getPostComments, getPostReactions, getUserById, postReactions} from "../../../../services/fetcher";
+import {SelfContext} from "../../../../App";
 
 const PostCard = ({
     title,
     authorId,
     date,
     content,
-    likes,
     postId,
-    comments,
     imageSrc,
     isLoaded
 }) => {
+    const self = useContext(SelfContext);
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [isAuthorLoaded, setIsAuthorLoaded] = useState(false);
     const [author, setAuthor] = useState("");
-    getUserById(authorId).then((res) => {
-        setAuthor(res.data);
-        setIsAuthorLoaded(true);
-    }).catch(e => console.log(e))
+    const [comments, setComments] = useState([]);
+    const [reactions, setReactions] = useState([]);
+
+    useEffect(() => {
+        return () => {
+            getUserById(authorId).then((res) => {
+                setAuthor(res.data);
+                setIsAuthorLoaded(true);
+            }).catch(e => console.log(e))
+
+            getPostComments(postId).then((res) => {
+                setComments(res.data);
+            }).catch(e => console.log(e));
+
+            getPostReactions(postId).then((res) => {
+                setReactions(res.data.filter(
+                    (element) => {
+                        return element.type === 'LIKE'
+                    }
+                ));
+            }).catch(e=> console.log(e));
+        };
+    }, [reactions, comments]);
+
+    const react = () => {
+        postReactions(postId, self.id).then(r => {
+            setReactions(prevState => [...prevState, r.data])
+        }).catch(e=> console.log(e))
+    }
 
     return (
         <>
@@ -134,13 +155,15 @@ const PostCard = ({
                                 gap={"2"}
                             >
                                 {
-                                    likes ?
-                                        <Badge>{likes}</Badge>:
+                                    reactions.length > 0 ?
+                                        <Badge>{reactions.length}</Badge>:
                                         ''
                                 }
                                 <BiLike/>
                             </Flex>
-                        }>
+                        }
+                            onClick={react}
+                        >
                             Like
                         </Button>
                     </Skeleton>
@@ -158,8 +181,8 @@ const PostCard = ({
                                 gap={2}
                             >
                                 {
-                                    comments ?
-                                        <Badge>{comments}</Badge>:
+                                    comments.length > 0 ?
+                                        <Badge>{comments.length}</Badge>:
                                         ''
                                 }
                                 <BiChat/>
@@ -172,7 +195,7 @@ const PostCard = ({
                     </Skeleton>
                 </CardFooter>
             </Card>
-            <CommentsModal postId={postId} isOpen={isOpen} onClose={onClose}/>
+            <CommentsModal postId={postId} isOpen={isOpen} onClose={onClose} self={self}/>
         </>
     )
 }
