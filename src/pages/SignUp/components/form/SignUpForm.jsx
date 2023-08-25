@@ -14,6 +14,7 @@ import { useState } from 'react';
 
 import { BsFillSendCheckFill } from "react-icons/bs"
 import SignUpInput from './SignUpInput';
+import ImgProfile from '../imageProfile/ImgProfil';
 
 import { signUpRequest } from "../../../../services/fetcher";
 
@@ -21,6 +22,7 @@ const SignUpForm = () => {
     const [userName, setUserName, modifyUserName, clearUserName] = useInput("");
     const [email, setEmail, modifyEmail, clearEmail] = useInput("");
     const [password, setPassword, modifyPassword, clearPassword] = useInput("");
+    const [imagePath, setImagePath] = useState(null);
 
     const [send, setSend] = useState(false);
   
@@ -29,7 +31,11 @@ const SignUpForm = () => {
             <FormControl id="userName">
                 <Stack direction={['column', 'row']} spacing={6} justifyContent={"center"}>
                     <Center>
-                        <Avatar size="xl" name={userName}></Avatar>
+                        <ImgProfile
+                            userName={userName}
+                            imagePath={imagePath}
+                            setImagePath={setImagePath}
+                            />
                     </Center>
                 </Stack>
             </FormControl>
