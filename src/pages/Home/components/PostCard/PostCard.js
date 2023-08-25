@@ -23,7 +23,7 @@ import {BiLike, BiChat} from "react-icons/bi";
 import {colors} from "../../../../common/colors";
 import CommentsModal from "./CommentsModal";
 import {getPostComments, getPostReactions, getUserById, postReactions} from "../../../../services/fetcher";
-import {SelfContext} from "../../../../App";
+import {StorageProvider} from "../../../../services/storage"
 
 const PostCard = ({
     title,
@@ -34,12 +34,12 @@ const PostCard = ({
     imageSrc,
     isLoaded
 }) => {
-    const self = useContext(SelfContext);
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [isAuthorLoaded, setIsAuthorLoaded] = useState(false);
     const [author, setAuthor] = useState("");
     const [comments, setComments] = useState([]);
     const [reactions, setReactions] = useState([]);
+    const self = StorageProvider.getItem("self")
 
     useEffect(() => {
         return () => {
