@@ -16,7 +16,6 @@ import {getPostComments, postComments} from "../../../../services/fetcher";
 import Comments from "./Comments";
 
 const CommentsModal = ({isOpen, onClose, postId, self}) => {
-    const [selfState, setSelfState] = useState(null);
     const [comments, setComments] = useState([]);
     const [commentIsLoaded, {on}] = useBoolean(false);
     const [tempComment, setTempComment] = useState("");
@@ -29,11 +28,10 @@ const CommentsModal = ({isOpen, onClose, postId, self}) => {
                 on();
             })
             .catch(e => console.log(e));
-        setSelfState(self);
     }, []);
 
     function sendComment() {
-        postComments(postId, selfState.id, tempComment).then((res) => {
+        postComments(postId, self.id, tempComment).then((res) => {
             setComments(prev => [...prev, res.data])
             setTempComment("");
         }).catch(e=> console.log(e))
@@ -79,7 +77,7 @@ const CommentsModal = ({isOpen, onClose, postId, self}) => {
                             borderColor={"black"}
                             mb={4}
                         >
-                            <Avatar name={selfState.username} src={selfState.photo} size={"sm"}/>
+                            <Avatar name={self.username} src={self.photo} size={"sm"}/>
                         </Box>
                         <InputGroup
                             mb={4}
