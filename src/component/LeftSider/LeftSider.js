@@ -6,15 +6,10 @@ import {
     Flex,
     Icon,
     useColorModeValue,
-    Text,
     Drawer,
     DrawerContent,
     useDisclosure,
-    BoxProps,
-    FlexProps,
     Avatar, 
-    AvatarBadge,
-    AvatarGroup,
     Wrap,
     WrapItem
   } from '@chakra-ui/react'
@@ -98,7 +93,7 @@ export default function SimpleSidebar() {
         </Wrap>
 
         <Heading  fontSize={"xl"} fontWeight="bold">
-            Kirisaki_Vk
+            Kirisaki_VK
         </Heading>
 
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />

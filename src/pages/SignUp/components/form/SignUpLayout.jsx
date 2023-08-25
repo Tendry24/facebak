@@ -6,7 +6,7 @@ import {
 
 import SignUpForm from "./SignUpForm"
 
-const SignUp = () => {
+const SignUpLayout = () => {
     return (
     <Flex
         w={'full'}
@@ -30,4 +30,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp;
+export default SignUpLayout;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     Avatar, Box, Button, Flex,
     Heading, Input,
@@ -8,24 +8,52 @@ import {
     ModalContent,
     ModalFooter,
     ModalHeader,
-    ModalOverlay, Textarea
+    ModalOverlay, Skeleton, SkeletonCircle, SkeletonText, Text, Textarea, useBoolean
 } from "@chakra-ui/react";
 import {colors} from "../../../../common/colors";
 import {IoSend, IoClose} from "react-icons/io5";
+import {getPostComments} from "../../../../services/fetcher";
+import {BiCircle} from "react-icons/bi";
+import {BsFillCircleFill} from "react-icons/bs";
+import Comments from "./Comments";
 
-const CommentsModal = ({isOpen, onClose}) => {
+const CommentsModal = ({isOpen, onClose, postId}) => {
+    const [comments, setComments] = useState([]);
+    const [commentIsLoaded, {on}] = useBoolean(false);
+    useEffect(() => {
+        getPostComments(postId)
+            .then(res => {
+                setComments(res.data);
+                on();
+                console.log(comments)
+            })
+            .catch(e => console.log(e))
+    }, []);
+
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} motionPreset={"scale"} isCentered>
             <ModalOverlay/>
-            <ModalContent bgColor={colors.hex.light}>
+            <ModalContent bgColor={colors.hex.light} width={"70%"} maxW={"800px"}>
                 <ModalHeader>
                     <Heading>Comments</Heading>
                     <ModalCloseButton>
                         <IoClose size={"25px"}/>
                     </ModalCloseButton>
                 </ModalHeader>
-                <ModalBody>
-                    All comments goes here
+                <ModalBody maxH={"90%"} overflow={"auto"}>
+                    {
+                        commentIsLoaded ?
+                            comments.length != 0 && comments.map((comment,i) => (
+                                <Comments
+                                    user={comment.user}
+                                    comment={comment.content}
+                                    date={comment.updatedAt}
+                                    isLoaded={commentIsLoaded}
+                                    key={i}
+                                />
+                            )) :
+                            <Comments/>
+                    }
                 </ModalBody>
                 <ModalFooter
                     w={"100%"}

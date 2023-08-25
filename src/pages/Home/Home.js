@@ -12,9 +12,9 @@ const Home = () => {
                 width={"100%"}
                 h={"100%"}
             >
-            <NewsFeed />
-            <MoreSection />
-        </Flex>
+                <NewsFeed/>
+                <MoreSection />
+            </Flex>
     )
 }
 export default Home;
