@@ -20,10 +20,30 @@ const getPostComments = async (postId) => {
     return await fetch.get(`/posts/${postId}/comments`)
 }
 
+const getPostReactions = async (postId) => {
+    return await  fetch.get(`/posts/${postId}/reactions`)
+}
+
+const postReactions = async (postId, selfId) => {
+    return await fetch.post(`/posts/${postId}/reactions`, {
+        userId: selfId,
+        type: 'LIKE'
+    })
+}
+
+const postComments = async (postId, selfId, comment) => {
+    return await fetch.put(`/posts/${postId}/comments`, {
+        content: comment,
+        userId: selfId
+    })
+}
 
 export {
     getAllPosts,
     getAllUsers,
     getUserById,
-    getPostComments
+    getPostComments,
+    getPostReactions,
+    postReactions,
+    postComments
 }
