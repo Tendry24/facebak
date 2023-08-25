@@ -7,10 +7,16 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 import SimpleSidebar from './component/LeftSider/LeftSider';
 import {getUserById} from "./services/fetcher";
 
-export const SelfContext = createContext(null);
+export const SelfContext = createContext({
+    username: "Not Found",
+    photo: "photo"
+});
 
 function App() {
-    const [self, setSelf] = useState(null);
+    const [self, setSelf] = useState({
+        username: "user-not_found",
+        photo: "user_profile"
+    });
     useEffect(() => {
         getUserById("7d54249c-552d-4f56-a298-51c97f2a51b8").then((res) => {
             setSelf(res.data)
