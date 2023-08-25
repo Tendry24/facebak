@@ -19,7 +19,7 @@ const SignUpLayout = () => {
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
           <Center> 
-              Sign in
+              Sign Up
           </Center>
       </Heading>
       <Stack

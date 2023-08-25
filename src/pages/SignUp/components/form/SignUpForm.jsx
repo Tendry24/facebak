@@ -7,7 +7,8 @@ import {
     Avatar,
     Center,
     CircularProgress,
-    CircularProgressLabel
+    CircularProgressLabel,
+    Text
   } from '@chakra-ui/react'
 import { useState } from 'react';
 
@@ -86,22 +87,32 @@ const SignUpForm = () => {
                     Cancel
                 </Button>
                 <Button
-                    bg={'blue.400'}
+                    bg={
+                        !send ?
+                        ('blue.400') :
+                        ('gray.400')
+                    }
                     color={'white'}
                     w="full"
                     _hover={{
-                    bg: 'blue.500',
+                        bg: 'blue.500'
                     }}
                     onClick={()=>{
                         setSend(true)
                         setTimeout(()=>{
                         }, 1000)
-                        }}>
-                    Submit
+                        }}
+                        alignItems={"center"}>
+                    
                     {
                         send ?
-                        (<CircularProgress isIndeterminate color='green.300' h={"full"} fontSize={"2xl"} />) : 
-                        (<></>)
+                        (<CircularProgress isIndeterminate
+                            color='green.300'
+                            size={"1.25em"}
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                            />) : 
+                        (<><Text>Submit</Text></>)
                     }
                 </Button>
             </Stack>
