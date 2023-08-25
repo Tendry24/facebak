@@ -80,7 +80,7 @@ const CommentsModal = ({isOpen, onClose, postId, self}) => {
                             borderColor={"black"}
                             mb={4}
                         >
-                            <Avatar name={selfState.username} src={selfState.photo} size={"sm"}/>
+                            <Avatar name={"Kirisaki_VK"} size={"sm"}/>
                         </Box>
                         <InputGroup
                             mb={4}
