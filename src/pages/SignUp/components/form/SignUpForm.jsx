@@ -18,6 +18,7 @@ import ImgProfile from '../imageProfile/ImgProfil';
 
 import { signUpRequest } from "../../../../services/fetcher";
 import { colors } from '../../../../common/colors';
+import useInput from '../../../../hooks/useInput';
 
 const SignUpForm = () => {
     const [userName, setUserName, modifyUserName, clearUserName] = useInput("");
@@ -125,20 +126,6 @@ const SignUpForm = () => {
             </Stack>
         </>
     )
-};
-
-function useInput (init) {
-    const [Input, setInput] = useState(init);
-
-    const modifyInput = (e) => {
-        setInput(e.target.value)
-    };
-
-    const clearInput = () => {
-      setInput("")
-    };
-    
-    return [Input, setInput, modifyInput, clearInput]
 };
 
 export default SignUpForm;

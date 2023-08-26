@@ -4,14 +4,14 @@ import { BiSearchAlt } from "react-icons/bi";
 import { Input } from "@chakra-ui/react";
 import { colors } from "../../../../common/colors";
 
-const ContactMenu = () => {
+const ContactMenu = ({search, modifySearch}) => {
     return (
         <Flex
             justifyContent={"space-evenly"}
             alignItems={"center"}
             width={"100%"}>
             <Heading size={"sm"} width={"40%"}>Contact</Heading>
-            <Input width={"40%"}/>
+            <Input width={"40%"} onChange={modifySearch} value={search} />
             <IconButton icon={
                 <BiSearchAlt
                     width={"20%"}

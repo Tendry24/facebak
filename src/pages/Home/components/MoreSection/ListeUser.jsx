@@ -1,24 +1,31 @@
 import { Divider, Flex, Spinner } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import UserRepresentation from "./UserRepresentation";
 import ContactMenu from "./ContactMenu";
 import axios from "axios";
 import { TbMoodEmpty } from "react-icons/tb";
 import { getAllUsers } from "../../../../services/fetcher";
 import { colors } from "../../../../common/colors";
+import { ilike } from "../../../../services/utils";
+import useInput from "../../../../hooks/useInput";
 
 const ListeUser = () => {
     const [listePerson, setListePerson, addInListePerson] = useListeUser([]);
+    const [search, setSearch, modifySearch] = useInput("");
 
     React.useEffect(() => {
         getAllUsers()
             .then(result=>{
-                setListePerson(result.data);
+                if (search == ""){
+                    setListePerson(result.data);
+                } else {
+                    setListePerson(result.data.filter(v=>ilike(v.username, search)))
+                }
             })
             .catch(e => {
                 console.log(e);
             })
-    }, []);
+    }, [search]);
 
     return (
         <Flex
@@ -29,7 +36,7 @@ const ListeUser = () => {
             padding={"5px"}
             margin={"5px"}
             gap={"8px"}>
-            <ContactMenu />
+            <ContactMenu search={search} modifySearch={modifySearch} />
             <Divider color="blue.500" size="lg" />
             {listePerson.map((person, index)=>{
                 person.name = person.username;
