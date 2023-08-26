@@ -7,6 +7,7 @@ import {
   } from '@chakra-ui/react'
 
 import SignUpForm from "./SignUpForm"
+import { colors } from "../../../../common/colors";
 
 const SignUpLayout = () => {
     return (
@@ -16,7 +17,7 @@ const SignUpLayout = () => {
       align={'center'}
       justify={'center'}
       flexDir={"column"}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
+      bg={useColorModeValue(/*'gray.50'*/colors.rgba.light(1), 'gray.800')}>
       <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
           <Center> 
               Sign Up
@@ -28,7 +29,7 @@ const SignUpLayout = () => {
         maxW={'md'}
         bg={useColorModeValue('white', 'gray.700')}
         rounded={'xl'}
-        boxShadow={'lg'}
+        boxShadow={'dark-lg'}
         p={6}
         my={12}
         transition={"all 1s"}>

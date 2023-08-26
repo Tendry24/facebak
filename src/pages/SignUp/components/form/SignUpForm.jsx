@@ -17,6 +17,7 @@ import SignUpInput from './SignUpInput';
 import ImgProfile from '../imageProfile/ImgProfil';
 
 import { signUpRequest } from "../../../../services/fetcher";
+import { colors } from '../../../../common/colors';
 
 const SignUpForm = () => {
     const [userName, setUserName, modifyUserName, clearUserName] = useInput("");
@@ -75,7 +76,7 @@ const SignUpForm = () => {
             }
             <Stack spacing={6} direction={['column', 'row']}>
                 <Button
-                    bg={'red.400'}
+                    bg={colors.rgba.alert(1)}
                     color={'white'}
                     w="full"
                     _hover={{
@@ -95,8 +96,8 @@ const SignUpForm = () => {
                 <Button
                     bg={
                         !send ?
-                        ('blue.400') :
-                        ('gray.400')
+                        (colors.rgba.light(1)) :
+                        (colors.rgba.gray(1))
                     }
                     color={'white'}
                     w="full"
