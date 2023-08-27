@@ -16,8 +16,8 @@ import { Logo } from './Logo'
 import { OAuthButtonGroup } from './OAuthButtonGroup'
 import { PasswordField } from './PasswordField'
 import { Link } from 'react-router-dom';
-import SignUp from '../../pages/SignUp/SignUp';
-import router from '../MainLayout';
+import SignUp from '../../SignUp/SignUp';
+import router from '../../../component/MainLayout';
 
 export const LoginLayout = () => (
   <Container
