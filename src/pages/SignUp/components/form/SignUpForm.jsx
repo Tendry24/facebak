@@ -16,7 +16,6 @@ import { BsFillSendCheckFill } from "react-icons/bs"
 import SignUpInput from './SignUpInput';
 import ImgProfile from '../imageProfile/ImgProfil';
 
-import { signUpRequest } from "../../../../services/fetcher";
 import { colors } from '../../../../common/colors';
 import useInput from '../../../../hooks/useInput';
 import { inputIsNull } from '../../../../services/utils';
