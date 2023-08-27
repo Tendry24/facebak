@@ -21,7 +21,7 @@ export const Logo = (props) => (
         font-weight="bold"
         fill="white"
       >
-        F
+        Fa
       </text>
     </svg>
     </Center>
