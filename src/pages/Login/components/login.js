@@ -55,6 +55,7 @@ export const LoginLayout = () => {
         postLogin(loginFormData).then(res => {
             StorageProvider.setItem("self", res.data)
             navigate("/")
+            window.location.reload();
         }).catch(e => {
             console.log(e)
             setInvalidationState(prevState => ({
