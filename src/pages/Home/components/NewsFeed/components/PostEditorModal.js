@@ -1,15 +1,14 @@
 import React from 'react'
 import {
-    Button, Editable, EditableInput, EditablePreview, Flex,
-    Heading, Input,
+    Button, Editable, EditablePreview, EditableTextarea,
+    Heading,
     Modal,
     ModalBody,
     ModalContent,
     ModalFooter,
     ModalHeader,
-    ModalOverlay, useEditable
+    ModalOverlay,
 } from "@chakra-ui/react";
-import EditableControls from "./EditableControls";
 
 const PostEditorModal = ({disclosure}) => {
 
@@ -25,8 +24,7 @@ const PostEditorModal = ({disclosure}) => {
                         defaultValue={"Post title"}
                     >
                         <EditablePreview/>
-                        <Input as={EditableInput}/>
-                        <EditableControls/>
+                        <EditableTextarea/>
                     </Editable>
                 </ModalBody>
                 <ModalFooter
