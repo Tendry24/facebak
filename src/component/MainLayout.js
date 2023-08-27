@@ -5,6 +5,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import {StorageProvider} from "../services/storage";
+import Logout from "../pages/Logout/Logout";
 
 const PrivateRoute = ({component: Component, ...props}) => {
     // check if the user is logged in
@@ -38,6 +39,7 @@ const MainLayout = () => {
                     <Route path={"/"} element={<PrivateRoute component={Home}/>}/>
                     <Route path={"/login"} element={<Login/>}/>
                     <Route path={"/signup"} element={<SignUp/>}/>
+                    <Route path={"/logout"} element={<Logout/>}/>
                 </Routes>
             </BrowserRouter>
         </Flex>

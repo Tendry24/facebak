@@ -2,13 +2,10 @@ import {colors} from "../../common/colors";
 import {
     Box,
     Flex,
-    Text,
     Heading,
-    Avatar
 } from "@chakra-ui/react";
 import SearchBar from "./SearchBar";
 import UserInfo from "./UserInfo";
-import {StorageProvider} from "../../services/storage";
 import {SelfService} from "../../services/selfService";
 
 const NavBar = () => {
