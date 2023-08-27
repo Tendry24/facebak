@@ -9,15 +9,17 @@ import {
   Heading,
   HStack,
   Input,
-  Link,
   Stack,
   Text,
 } from '@chakra-ui/react'
 import { Logo } from './Logo'
 import { OAuthButtonGroup } from './OAuthButtonGroup'
 import { PasswordField } from './PasswordField'
+import { Link } from 'react-router-dom';
+import SignUp from '../../pages/SignUp/SignUp';
+import router from '../MainLayout';
 
-export const App = () => (
+export const LoginLayout = () => (
   <Container
     maxW="lg"
     py={{
@@ -48,7 +50,7 @@ export const App = () => (
             Log in to your account
           </Heading>
           <Text color="fg.muted">
-            Don't have an account? <Link href="#">Sign up</Link>
+            Don't have an account? <Link to="/signup">Sign up</Link>
           </Text>
         </Stack>
       </Stack>
