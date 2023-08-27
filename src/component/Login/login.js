@@ -13,9 +13,9 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-//import { Logo } from './Logo'
-//import { OAuthButtonGroup } from './OAuthButtonGroup'
-//import { PasswordField } from './PasswordField'
+import { Logo } from './Logo'
+import { OAuthButtonGroup } from './OAuthButtonGroup'
+import { PasswordField } from './PasswordField'
 
 export const LoginLayout = () => (
   <Container
@@ -31,7 +31,7 @@ export const LoginLayout = () => (
   >
     <Stack spacing="8">
       <Stack spacing="6">
-      
+        <Logo />
         <Stack
           spacing={{
             base: '2',
@@ -80,7 +80,7 @@ export const LoginLayout = () => (
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input id="email" type="email" />
             </FormControl>
-            
+            <PasswordField />
           </Stack>
           <HStack justify="space-between">
             <Checkbox defaultChecked>Remember me</Checkbox>
@@ -97,7 +97,7 @@ export const LoginLayout = () => (
               </Text>
               <Divider />
             </HStack>
-            
+            <OAuthButtonGroup />
           </Stack>
         </Stack>
       </Box>
