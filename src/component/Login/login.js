@@ -13,11 +13,11 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { Logo } from './Logo'
-import { OAuthButtonGroup } from './OAuthButtonGroup'
-import { PasswordField } from './PasswordField'
+//import { Logo } from './Logo'
+//import { OAuthButtonGroup } from './OAuthButtonGroup'
+//import { PasswordField } from './PasswordField'
 
-export const App = () => (
+export const LoginLayout = () => (
   <Container
     maxW="lg"
     py={{
@@ -31,7 +31,7 @@ export const App = () => (
   >
     <Stack spacing="8">
       <Stack spacing="6">
-        <Logo />
+      
         <Stack
           spacing={{
             base: '2',
@@ -80,7 +80,7 @@ export const App = () => (
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input id="email" type="email" />
             </FormControl>
-            <PasswordField />
+            
           </Stack>
           <HStack justify="space-between">
             <Checkbox defaultChecked>Remember me</Checkbox>
@@ -97,7 +97,7 @@ export const App = () => (
               </Text>
               <Divider />
             </HStack>
-            <OAuthButtonGroup />
+            
           </Stack>
         </Stack>
       </Box>
