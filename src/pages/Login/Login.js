@@ -2,34 +2,6 @@ import React from 'react'
 import {Flex} from "@chakra-ui/react";
 import { LoginLayout } from '../../component/Login/login';
 
-//import { colors } from '../../common/colors'
-/*import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  Divider,
-  FormControl,
-  FormLabel,
-  Heading,
-  HStack,
-  Input,
-  Link,
-  Stack,
-  Text,
-} from '@chakra-ui/react'
-import { Logo } from './Logo'
-import { OAuthButtonGroup } from './OAuthButtonGroup'
-import { PasswordField } from './PasswordField'
-*/
-
-/*const LinkItems = [
-    { name: 'friends', icon: FaUserFriends },
-    { name: 'Pages', icon: FaPager },
-    { name: 'Groups', icon: BiSolidGroup },
-    { name: 'Videos', icon: BiSolidVideos },
-    { name: 'Messages', icon: FiMessageSquare },
-  ]*/
 
 const Login = () => {
     return (
