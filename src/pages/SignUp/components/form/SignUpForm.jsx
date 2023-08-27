@@ -19,14 +19,16 @@ import ImgProfile from '../imageProfile/ImgProfil';
 import { signUpRequest } from "../../../../services/fetcher";
 import { colors } from '../../../../common/colors';
 import useInput from '../../../../hooks/useInput';
+import { inputIsNull } from '../../../../services/utils';
 
 const SignUpForm = () => {
     const [userName, setUserName, modifyUserName, clearUserName] = useInput("");
     const [email, setEmail, modifyEmail, clearEmail] = useInput("");
     const [password, setPassword, modifyPassword, clearPassword] = useInput("");
-    const [imagePath, setImagePath] = useState(null);
+    const [imagePath, setImagePath] = useState("");
 
     const [send, setSend] = useState(false);
+    const [correct, setCorrect] = useState(true);
   
     return (
         <>
@@ -43,7 +45,12 @@ const SignUpForm = () => {
             </FormControl>
             { !send ?
                 (
-                    <Stack>
+                    <Stack
+                        onKeyDown={(e)=>{
+                            if (e.key == "Enter"){
+                                submitAction(userName, password, email, setSend, setCorrect)
+                            }
+                        }}>
                         <SignUpInput
                             id="userName"
                             label="User name"
@@ -105,11 +112,7 @@ const SignUpForm = () => {
                     _hover={{
                         bg: 'blue.500'
                     }}
-                    onClick={()=>{
-                        setSend(true)
-                        setTimeout(()=>{
-                        }, 1000)
-                        }}
+                    onClick={()=>submitAction(userName, password, email, setSend, setCorrect)}
                         alignItems={"center"}>
                     
                     {
@@ -124,8 +127,39 @@ const SignUpForm = () => {
                     }
                 </Button>
             </Stack>
+            {
+                !correct ? 
+                (<Stack
+                    bg={colors.rgba.alert(.7)}
+                    w={"full"}
+                    h={"full"}
+                    justifyContent={"center"}
+                    alignContent={"center"}
+                    borderRadius={"2xl"}
+                    >
+                    <Text
+                        textAlign={"center"}>
+                        Il manque des elements dans vos entrées
+                    </Text>
+                </Stack>) : (
+                    <></>
+                )
+            }
         </>
     )
+};
+
+const submitAction = (userName, password, email, setSend, setCorrect) => {
+    if (!inputIsNull(userName) && !inputIsNull(password) && !inputIsNull(email))
+        setSend(true)
+    else {
+        setCorrect(false);
+        setTimeout(()=>{
+            setCorrect(true);
+        }, 5000)
+    }
+    setTimeout(()=>{
+    }, 1000)
 };
 
 export default SignUpForm;

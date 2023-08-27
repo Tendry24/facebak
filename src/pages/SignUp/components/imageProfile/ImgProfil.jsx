@@ -1,9 +1,11 @@
 import { Avatar } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ImgModifier from "./ImgModifier";
 
 const ImgProfile = ({userName, imagePath, setImagePath}) => {
     const [isEditing, setIsEditing] = useState(false);
+
+    useEffect(() => {}, [userName])
 
     return (
         <>
