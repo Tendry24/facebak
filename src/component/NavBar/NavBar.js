@@ -9,9 +9,11 @@ import {
 import SearchBar from "./SearchBar";
 import UserInfo from "./UserInfo";
 import {StorageProvider} from "../../services/storage";
+import {SelfService} from "../../services/selfService";
 
 const NavBar = () => {
-    const self = StorageProvider.getItem("self");
+    const self = SelfService.get();
+
     return(
         <Flex
             justifyContent={"space-between"}

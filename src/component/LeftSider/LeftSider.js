@@ -28,6 +28,7 @@ import {
     BiSolidVideos
   }from 'react-icons/bi'
 import {StorageProvider} from "../../services/storage";
+import {SelfService} from "../../services/selfService";
   
 
 
@@ -78,7 +79,7 @@ export default function SimpleSidebar() {
   }
   
   const SidebarContent = ({ onClose, ...rest }) => {
-    const self = StorageProvider.getItem("self")
+    const self = SelfService.get();
     return (
       <Box
         bg={useColorModeValue('white', 'gray.900')}

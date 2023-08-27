@@ -15,6 +15,14 @@ export const PasswordField = forwardRef((props, ref) => {
   const { isOpen, onToggle } = useDisclosure()
   const inputRef = useRef(null)
   const mergeRef = useMergeRefs(inputRef, ref)
+  const [formData, setFormData] = props.loginDataState;
+
+  const handlePasswordChange = (element) => {
+    setFormData(prevState => ({
+      ...prevState,
+      password: element.target.value
+    }))
+  }
   const onClickReveal = () => {
     onToggle()
     if (inputRef.current) {
@@ -41,6 +49,8 @@ export const PasswordField = forwardRef((props, ref) => {
           name="password"
           type={isOpen ? 'text' : 'password'}
           autoComplete="current-password"
+          value={formData.password}
+          onChange={handlePasswordChange}
           required
           {...props}
         />

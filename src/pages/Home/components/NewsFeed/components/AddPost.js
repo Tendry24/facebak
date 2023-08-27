@@ -2,9 +2,10 @@ import React from 'react'
 import {Avatar, Card, Input, useDisclosure} from "@chakra-ui/react";
 import {StorageProvider} from "../../../../../services/storage";
 import PostEditorModal from "./PostEditorModal";
+import {SelfService} from "../../../../../services/selfService";
 
 const AddPost = () => {
-    const self = StorageProvider.getItem("self");
+    const self = SelfService.get();
     const {isOpen, onClose, onOpen} = useDisclosure();
     return (
         <>

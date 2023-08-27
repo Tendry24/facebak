@@ -24,6 +24,7 @@ import {colors} from "../../../../common/colors";
 import CommentsModal from "./CommentsModal";
 import {getPostComments, getPostReactions, getUserById, postReactions} from "../../../../services/fetcher";
 import {StorageProvider} from "../../../../services/storage"
+import {SelfService} from "../../../../services/selfService";
 
 const PostCard = ({
     title,
@@ -39,8 +40,7 @@ const PostCard = ({
     const [author, setAuthor] = useState("");
     const [comments, setComments] = useState([]);
     const [reactions, setReactions] = useState([]);
-    const self = StorageProvider.getItem("self")
-
+    const self = SelfService.get();
     useEffect(() => {
         return () => {
             getUserById(authorId).then((res) => {
