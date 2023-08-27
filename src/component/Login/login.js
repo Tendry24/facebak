@@ -17,7 +17,7 @@ import { Logo } from './Logo'
 import { OAuthButtonGroup } from './OAuthButtonGroup'
 import { PasswordField } from './PasswordField'
 
-export const App = () => (
+export const LoginLayout = () => (
   <Container
     maxW="lg"
     py={{
