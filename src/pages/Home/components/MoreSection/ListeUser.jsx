@@ -6,7 +6,7 @@ import axios from "axios";
 import { TbMoodEmpty } from "react-icons/tb";
 import { getAllUsers } from "../../../../services/fetcher";
 import { colors } from "../../../../common/colors";
-import { ilike } from "../../../../services/utils";
+import { ilike, inputIsNull } from "../../../../services/utils";
 import useInput from "../../../../hooks/useInput";
 
 const ListeUser = () => {
@@ -16,7 +16,7 @@ const ListeUser = () => {
     React.useEffect(() => {
         getAllUsers()
             .then(result=>{
-                if (search == ""){
+                if (inputIsNull(search)){
                     setListePerson(result.data);
                 } else {
                     setListePerson(result.data.filter(v=>ilike(v.username, search)))
