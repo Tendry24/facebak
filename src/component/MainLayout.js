@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import {StorageProvider} from "../services/storage";
 import Logout from "../pages/Logout/Logout";
+import SocialProfileSimple from "../pages/Profile/Profile";
 
 const PrivateRoute = ({component: Component, ...props}) => {
     // check if the user is logged in
@@ -37,6 +38,7 @@ const MainLayout = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path={"/"} element={<PrivateRoute component={Home}/>}/>
+                    <Route path={"/profile"} element={<PrivateRoute component={SocialProfileSimple}/>}/>
                     <Route path={"/login"} element={<Login/>}/>
                     <Route path={"/signup"} element={<SignUp/>}/>
                     <Route path={"/logout"} element={<Logout/>}/>

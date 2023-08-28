@@ -35,6 +35,11 @@ const UserInfo = ({ username, isActive, src }) => {
                     }}>
                         Disconnect
                     </MenuItem>
+                    <MenuItem onClick={() => {
+                        window.location = "/profile"
+                    }}>
+                        My profile
+                    </MenuItem>
                 </MenuList>
             </Menu>
 
