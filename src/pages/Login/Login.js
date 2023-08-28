@@ -1,6 +1,6 @@
 import React from 'react'
 import {Flex} from "@chakra-ui/react";
-import { LoginLayout } from '../../component/Login/login';
+import { LoginLayout } from './components/login';
 
 
 const Login = () => {

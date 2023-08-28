@@ -10,16 +10,6 @@ import {StorageProvider} from "./services/storage";
 
 
 function App() {
-    const [self, setSelf] = useState({
-        username: "user-not_found",
-        photo: "user_profile"
-    });
-    useEffect(() => {
-        getUserById("7d54249c-552d-4f56-a298-51c97f2a51b8").then((res) => {
-            setSelf(res.data)
-            StorageProvider.setItem("self", res.data)
-        }).catch(e => console.log(e))
-    }, []);
     return (
         <Box>
             <NavBar/>

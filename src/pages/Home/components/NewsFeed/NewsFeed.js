@@ -1,7 +1,8 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {Box, Flex} from "@chakra-ui/react";
+import React, {useEffect, useState} from 'react'
+import {Divider, Flex} from "@chakra-ui/react";
 import PostCard from "../PostCard/PostCard";
 import {getAllPosts} from "../../../../services/fetcher";
+import AddPost from "./components/AddPost";
 
 const NewsFeed = () => {
     const [posts, setPosts] = useState([]);
@@ -9,9 +10,7 @@ const NewsFeed = () => {
         getAllPosts().then((res) => {
             setPosts(res.data);
         })
-            .then(e => console.log(e))
             .catch(e => console.log(e));
-        console.log(posts)
     }, []);
     return (
         <Flex
@@ -21,6 +20,8 @@ const NewsFeed = () => {
             overflow={"auto"}
             alignItems={"center"}
         >
+            <AddPost/>
+            <Divider w={"50%"}/>
             {
                 posts.length ?
                     posts.map((e, i) => (
