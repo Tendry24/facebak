@@ -1,27 +1,53 @@
 import {
     Button,
     FormControl,
-    FormLabel,
-    Heading,
     Stack,
     Avatar,
     Center,
     CircularProgress,
-    CircularProgressLabel
-  } from '@chakra-ui/react'
+    useToast
+} from '@chakra-ui/react'
 import { useState } from 'react';
 
-import { BsFillSendCheckFill } from "react-icons/bs"
 import SignUpInput from './SignUpInput';
 
-import { signUpRequest } from "../../../../services/fetcher";
+import {postUser} from "../../../../services/fetcher";
+import {useNavigate} from "react-router-dom";
 
 const SignUpForm = () => {
     const [userName, setUserName, modifyUserName, clearUserName] = useInput("");
     const [email, setEmail, modifyEmail, clearEmail] = useInput("");
     const [password, setPassword, modifyPassword, clearPassword] = useInput("");
+    const status = useToast();
+    const navigate = useNavigate();
 
     const [send, setSend] = useState(false);
+
+    const signUp = () => {
+        postUser({
+            username: userName,
+            email: email,
+            password: password,
+            confirmPassword: password
+        }).then(res => {
+            status({
+                status: "success",
+                title: "Signed Up successfully",
+                description: "Please now SignIn with your account",
+                duration: 3000
+            })
+            navigate("/login")
+        }).catch(e => {
+            status(
+                {
+                    status: "error",
+                    title: "An error occured while processing request",
+                    description: e.response.data.message,
+                    duration: 3000
+                }
+            )
+        })
+    }
   
     return (
         <>
@@ -94,14 +120,13 @@ const SignUpForm = () => {
                     }}
                     onClick={()=>{
                         setSend(true)
-                        setTimeout(()=>{
-                        }, 1000)
+                        signUp();
+                        setSend(false);
                         }}>
-                    Submit
                     {
                         send ?
-                        (<CircularProgress isIndeterminate color='green.300' h={"full"} fontSize={"2xl"} />) : 
-                        (<></>)
+                        (<CircularProgress isIndeterminate color='green.300' size={"25px"} rigth={0}/>) :
+                        (<>Submit</>)
                     }
                 </Button>
             </Stack>
