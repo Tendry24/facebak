@@ -49,6 +49,10 @@ export const LoginLayout = () => {
         })
 
         if (usernameIsInvalid || emailIsValid || passwordIsValid) {
+            setInvalidationState(prevState => ({
+                ...prevState,
+                    message: "Please Fill out filed correctly"
+            }))
             return;
         }
 
@@ -60,7 +64,7 @@ export const LoginLayout = () => {
             console.log(e)
             setInvalidationState(prevState => ({
                 ...prevState,
-                message: e
+                message: e.response.data.message
             }))
         })
     }
@@ -163,7 +167,7 @@ export const LoginLayout = () => {
                         </HStack>
                         <Stack spacing="6">
                             <Button onClick={login}>Sign in</Button>
-                            <Alert status='error' display={invalidationState.message === "" ? 'none' : ''}>
+                            <Alert status='error' display={invalidationState.message === "" ? 'none' : 'flex'} flexDirection={"row"}>
                                 <AlertIcon />
                                 <AlertTitle>{invalidationState.message}</AlertTitle>
                             </Alert>
