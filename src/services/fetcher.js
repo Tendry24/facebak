@@ -72,6 +72,10 @@ const postLogin = async (userInfo) => {
     return await fetch.post("/users/login", userInfo)
 }
 
+const postUser = async (user) => {
+    return await fetch.post("/users", user);
+}
+
 export {
     getAllPosts,
     getAllUsers,
@@ -80,5 +84,6 @@ export {
     getPostReactions,
     postReactions,
     postComments,
-    postLogin
+    postLogin,
+    postUser
 }
