@@ -2,14 +2,15 @@ import {colors} from "../../common/colors";
 import {
     Box,
     Flex,
-    Text,
     Heading,
-    Avatar
 } from "@chakra-ui/react";
 import SearchBar from "./SearchBar";
 import UserInfo from "./UserInfo";
+import {SelfService} from "../../services/selfService";
 
 const NavBar = () => {
+    const self = SelfService.get();
+
     return(
         <Flex
             justifyContent={"space-between"}
@@ -26,7 +27,7 @@ const NavBar = () => {
                 <Heading size={"md"}>Facebak</Heading>
             </Box>
             <SearchBar/>
-            <UserInfo username={"Kirisaki VK"} isActive/>
+            <UserInfo username={self.username} src={self.photo} isActive/>
         </Flex>
     )
 }

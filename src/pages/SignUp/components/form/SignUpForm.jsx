@@ -1,24 +1,24 @@
 import {
     Button,
     FormControl,
-    FormLabel,
-    Heading,
     Stack,
     Avatar,
     Center,
     CircularProgress,
     CircularProgressLabel,
-    Text
-  } from '@chakra-ui/react'
+    Text,
+    useToast
+} from '@chakra-ui/react'
 import { useState } from 'react';
 
-import { BsFillSendCheckFill } from "react-icons/bs"
 import SignUpInput from './SignUpInput';
 import ImgProfile from '../imageProfile/ImgProfil';
 
 import { colors } from '../../../../common/colors';
 import useInput from '../../../../hooks/useInput';
 import { inputIsNull } from '../../../../services/utils';
+import {postUser} from "../../../../services/fetcher";
+import {useNavigate} from "react-router-dom";
 
 const SignUpForm = () => {
     const [userName, setUserName, modifyUserName, clearUserName] = useInput("");
@@ -28,6 +28,34 @@ const SignUpForm = () => {
 
     const [send, setSend] = useState(false);
     const [correct, setCorrect] = useState(true);
+    const status = useToast();
+    const navigate = useNavigate();
+
+    const signUp = () => {
+        postUser({
+            username: userName,
+            email: email,
+            password: password,
+            confirmPassword: password
+        }).then(res => {
+            status({
+                status: "success",
+                title: "Signed Up successfully",
+                description: "Please now SignIn with your account",
+                duration: 3000
+            })
+            navigate("/login")
+        }).catch(e => {
+            status(
+                {
+                    status: "error",
+                    title: "An error occured while processing request",
+                    description: e.response.data.message,
+                    duration: 3000
+                }
+            )
+        })
+    }
   
     return (
         <>
@@ -47,7 +75,7 @@ const SignUpForm = () => {
                     <Stack
                         onKeyDown={(e)=>{
                             if (e.key == "Enter"){
-                                submitAction(userName, password, email, setSend, setCorrect)
+                                submitAction(userName, password, email, setSend, setCorrect, signUp)
                             }
                         }}>
                         <SignUpInput
@@ -111,7 +139,7 @@ const SignUpForm = () => {
                     _hover={{
                         bg: 'blue.500'
                     }}
-                    onClick={()=>submitAction(userName, password, email, setSend, setCorrect)}
+                    onClick={()=>submitAction(userName, password, email, setSend, setCorrect, signUp)}
                         alignItems={"center"}>
                     
                     {
@@ -148,9 +176,11 @@ const SignUpForm = () => {
     )
 };
 
-const submitAction = (userName, password, email, setSend, setCorrect) => {
-    if (!inputIsNull(userName) && !inputIsNull(password) && !inputIsNull(email))
+const submitAction = (userName, password, email, setSend, setCorrect, signUp) => {
+    if (!inputIsNull(userName) && !inputIsNull(password) && !inputIsNull(email)){
         setSend(true)
+        signUp()
+    }
     else {
         setCorrect(false);
         setTimeout(()=>{

@@ -12,7 +12,7 @@ const deleteItem = (key) => {
 
 const length = localStorage.length;
 
-export const Storage = {
+export const StorageProvider = {
     getItem,
     setItem,
     deleteItem,

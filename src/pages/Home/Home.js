@@ -15,6 +15,6 @@ const Home = () => {
                 <NewsFeed/>
                 <MoreSection />
             </Flex>
-    )
+        )
 }
 export default Home;
