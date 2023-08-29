@@ -6,6 +6,8 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import {StorageProvider} from "../services/storage";
 import Logout from "../pages/Logout/Logout";
+import SocialProfileSimple from "../pages/Profile/Profile";
+import Error from "../pages/Error";
 
 const PrivateRoute = ({component: Component, ...props}) => {
     // check if the user is logged in
@@ -29,7 +31,7 @@ const PrivateRoute = ({component: Component, ...props}) => {
 const MainLayout = () => {
     return (
         <Flex
-            w={"75%"}
+            w={"100%"}
             h={"100%"}
             justifyContent={"center"}
             alignItems={"center"}
@@ -37,9 +39,11 @@ const MainLayout = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path={"/"} element={<PrivateRoute component={Home}/>}/>
+                    <Route path={"/profile/:uid"} element={<PrivateRoute component={SocialProfileSimple}/>}/>
                     <Route path={"/login"} element={<Login/>}/>
                     <Route path={"/signup"} element={<SignUp/>}/>
                     <Route path={"/logout"} element={<Logout/>}/>
+                    <Route path='*' element={<Error/>}/>
                 </Routes>
             </BrowserRouter>
         </Flex>

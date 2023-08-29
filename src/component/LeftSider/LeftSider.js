@@ -29,11 +29,12 @@ import {
   }from 'react-icons/bi'
 import {StorageProvider} from "../../services/storage";
 import {SelfService} from "../../services/selfService";
+import {colors} from "../../common/colors";
   
 
 
   const LinkItems = [
-    { name: 'friends', icon: FaUserFriends },
+    { name: 'Friends', icon: FaUserFriends },
     { name: 'Pages', icon: FaPager },
     { name: 'Groups', icon: BiSolidGroup },
     { name: 'Videos', icon: BiSolidVideos },
@@ -87,18 +88,7 @@ export default function SimpleSidebar() {
         pos="fixed"
         h="full"
         {...rest}>
-        <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        
-        <Wrap>
-          <WrapItem>
-            <Avatar name={self.username} src={self.photo} />
-          </WrapItem>
-        </Wrap>
-
-        <Heading  fontSize={"xl"} fontWeight="bold">
-            {self.username}
-        </Heading>
-
+        <Flex alignItems="center" mx="8" justifyContent="space-between">
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
         </Flex>
         {LinkItems.map((link) => (
@@ -126,7 +116,7 @@ export default function SimpleSidebar() {
           role="group"
           cursor="pointer"
           _hover={{
-            bg: 'cyan.400',
+            bg: colors.hex.light,
             color: 'white',
           }}
           {...rest}>

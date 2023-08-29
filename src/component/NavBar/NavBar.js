@@ -7,11 +7,12 @@ import {
 import SearchBar from "./SearchBar";
 import UserInfo from "./UserInfo";
 import {SelfService} from "../../services/selfService";
+import {Link} from "react-router-dom";
 
 const NavBar = () => {
     const self = SelfService.get();
 
-    return(
+    return (
         <Flex
             justifyContent={"space-between"}
             alignItems={"center"}
@@ -24,7 +25,15 @@ const NavBar = () => {
             top={0}
         >
             <Box>
-                <Heading size={"md"}>Facebak</Heading>
+                <Heading size={"md"}
+                         _hover={{
+                             cursor: "pointer"
+                         }}
+                         onClick={() => {
+                             window.location = "/"
+                         }}>
+                    Facebak
+                </Heading>
             </Box>
             <SearchBar/>
             <UserInfo username={self.username} src={self.photo} isActive/>
