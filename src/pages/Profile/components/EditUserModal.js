@@ -58,6 +58,7 @@ const EditUserModal = ({isOpen, onClose, user}) => {
             })
             clearAll();
             onClose();
+            window.location.reload();
         }).catch(e => {
             toast({
                 status: "error",
