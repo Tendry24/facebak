@@ -38,11 +38,12 @@ const MainLayout = () => {
         >
             <BrowserRouter>
                 <Routes>
-                    <Route path={"/"} element={<PrivateRoute component={Home}/>} errorElement={Error}/>
+                    <Route path={"/"} element={<PrivateRoute component={Home}/>}/>
                     <Route path={"/profile/:uid"} element={<PrivateRoute component={SocialProfileSimple}/>}/>
                     <Route path={"/login"} element={<Login/>}/>
                     <Route path={"/signup"} element={<SignUp/>}/>
                     <Route path={"/logout"} element={<Logout/>}/>
+                    <Route path='*' element={<Error/>}/>
                 </Routes>
             </BrowserRouter>
         </Flex>
