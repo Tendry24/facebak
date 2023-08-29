@@ -1,113 +1,71 @@
 import {
-  Heading,
-  Avatar,
-  Box,
-  Center,
-  Text,
-  Stack,
-  Button,
-  Link,
-  Badge,
-  useColorModeValue,
+    Heading,
+    Avatar,
+    Box,
+    Center,
+    Text,
+    Stack,
+    Button,
+    Link,
+    Badge,
+    useColorModeValue, Flex, Divider,
 } from '@chakra-ui/react'
+import AvatarInfo from "./components/AvatarInfo";
+import AvatarActions from "./components/AvatarActions";
+import {SelfService} from "../../services/selfService";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {getUserById} from "../../services/fetcher";
 
 export default function SocialProfileSimple() {
-  return (
-    <Center py={6}>
-      <Box
-        maxW={'320px'}
-        w={'full'}
-        bg={useColorModeValue('white', 'gray.900')}
-        boxShadow={'2xl'}
-        rounded={'lg'}
-        p={6}
-        textAlign={'center'}>
-        <Avatar
-          size={'xl'}
-          src={
-            ''
-          }
-          mb={4}
-          pos={'relative'}
-          _after={{
-            content: '""',
-            w: 4,
-            h: 4,
-            bg: 'green.300',
-            border: '2px solid white',
-            rounded: 'full',
-            pos: 'absolute',
-            bottom: 0,
-            right: 3,
-          }}
-        />
-        <Heading fontSize={'2xl'} fontFamily={'body'}>
-          Tex carat
-        </Heading>
-        <Text fontWeight={600} color={'gray.500'} mb={4}>
-          @Tex_carat
-        </Text>
-        <Text
-          textAlign={'center'}
-          color={useColorModeValue('gray.700', 'gray.400')}
-          px={3}>
-          Actress, musician, songwriter and artist. PM for work inquires or{' '}
-          <Text color={'blue.400'}>#tag</Text> me in your posts
-        </Text>
+    const {uid} = useParams();
+    const self = SelfService.get();
+    const isSelf = uid === self.id;
+    const [user, setUser] = useState({
+        username: "",
+        bio: "",
+        photo: ""
+    });
 
-        <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            #art
-          </Badge>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            #photography
-          </Badge>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
-            #music
-          </Badge>
-        </Stack>
+    useEffect(() => {
+        getUserById(uid).then(res => {
+            setUser(res.data);
+        }).catch(e => {
+            console.log(e);
+        })
+    }, []);
 
-        <Stack mt={8} direction={'row'} spacing={4}>
-          <Button
-            flex={1}
-            fontSize={'sm'}
-            rounded={'full'}
-            _focus={{
-              bg: 'gray.200',
-            }}>
-            Message
-          </Button>
-          <Button
-            flex={1}
-            fontSize={'sm'}
-            rounded={'full'}
-            bg={'blue.400'}
-            color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-            }
-            _hover={{
-              bg: 'blue.500',
-            }}
-            _focus={{
-              bg: 'blue.500',
-            }}>
-            Follow
-          </Button>
-        </Stack>
-      </Box>
-    </Center>
-  )
+
+    return (
+        <Flex
+            direction={"column"}
+            flexWrap={"nowrap"}
+            w={"full"}
+            h={"full"}
+            alignItems={"center"}
+            m={2}
+            p={2}
+        >
+            <Flex
+                direction={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                mt={8}
+                w={"full"}
+                mb={8}
+            >
+                <AvatarInfo user={user} isSelf={isSelf}/>
+                <AvatarActions isSelf={isSelf} user={user}/>
+            </Flex>
+            <Divider/>
+            <Box w={"full"} p={2} mt={6}>
+                <Heading size={"lg"}>
+                    Bio
+                </Heading>
+                <Text>
+                    {user.bio}
+                </Text>
+            </Box>
+        </Flex>
+    )
 }

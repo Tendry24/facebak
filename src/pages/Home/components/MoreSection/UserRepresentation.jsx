@@ -1,13 +1,19 @@
 import { Flex, Avatar, Button, Text, AvatarBadge } from "@chakra-ui/react";
 import { FaCircle } from "react-icons/fa"
 import { colors } from "../../../../common/colors";
+import {useNavigate} from "react-router-dom";
 
 const UserRepresentation = ({person}) => {
+    const navigate = useNavigate();
     return (
         <Button
             width={"100%"}
             height={"3em"}
-            transition={"1s"}>
+            transition={"1s"}
+            onClick={() => {
+                navigate("/profile/" + person.id)
+            }}
+        >
             <Flex
                 alignItems={"center"}
                 justifyContent={"space-between"}
