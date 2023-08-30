@@ -11,7 +11,7 @@ const NewsFeed = () => {
             setPosts(res.data);
         })
             .catch(e => console.log(e));
-    }, []);
+    }, [posts]);
     return (
         <Flex
             height={"100%"}
@@ -20,11 +20,11 @@ const NewsFeed = () => {
             overflow={"auto"}
             alignItems={"center"}
         >
-            <AddPost/>
+            <AddPost setPosts={setPosts}/>
             <Divider w={"50%"}/>
             {
                 posts.length ?
-                    posts.map((e, i) => (
+                    [...posts].reverse().map((e, i) => (
                         <PostCard
                             title={e.title}
                             authorId={e.userId}
