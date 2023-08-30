@@ -4,7 +4,7 @@ import {StorageProvider} from "../../../../../services/storage";
 import PostEditorModal from "./PostEditorModal";
 import {SelfService} from "../../../../../services/selfService";
 
-const AddPost = () => {
+const AddPost = ({setPosts}) => {
     const self = SelfService.get();
     const {isOpen, onClose, onOpen} = useDisclosure();
     return (
@@ -27,7 +27,7 @@ const AddPost = () => {
                        onClick={onOpen}
                 />
             </Card>
-            <PostEditorModal disclosure={{isOpen, onClose}}/>
+            <PostEditorModal disclosure={{isOpen, onClose}} setPosts={setPosts}/>
         </>
     )
 }

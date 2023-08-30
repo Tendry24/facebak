@@ -84,6 +84,14 @@ const editUser = async (user) => {
     })
 }
 
+const sendPost = async (post) => {
+    return await fetch.put("/posts", post, {
+        headers: {
+            Authorization: "Bearer " + StorageProvider.getItem("self").token
+        }
+    })
+}
+
 export {
     getAllPosts,
     getAllUsers,
@@ -94,5 +102,6 @@ export {
     postComments,
     postLogin,
     postUser,
-    editUser
+    editUser,
+    sendPost
 }

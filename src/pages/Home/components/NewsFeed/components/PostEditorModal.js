@@ -1,16 +1,26 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
-    Button, Editable, EditablePreview, EditableTextarea,
+    Button, Editable, EditableInput, EditablePreview, EditableTextarea, Flex,
     Heading,
     Modal,
     ModalBody,
     ModalContent,
     ModalFooter,
     ModalHeader,
-    ModalOverlay,
+    ModalOverlay, useToast,
 } from "@chakra-ui/react";
+import {StorageProvider} from "../../../../../services/storage";
+import {colors} from "../../../../../common/colors";
+import {sendPost} from "../../../../../services/fetcher";
 
-const PostEditorModal = ({disclosure}) => {
+const PostEditorModal = ({disclosure, setPosts}) => {
+    const [post, setPost] = useState({
+        title: "",
+        content: "",
+        userId: StorageProvider.getItem("self").id
+    });
+
+    const toast = useToast();
 
     return (
         <Modal isOpen={disclosure.isOpen} onClose={disclosure.onClose}>
@@ -20,12 +30,46 @@ const PostEditorModal = ({disclosure}) => {
                     <Heading>New post</Heading>
                 </ModalHeader>
                 <ModalBody>
-                    <Editable
-                        defaultValue={"Post title"}
+                    <Flex direction={"column"}
+                        gap={2}
                     >
-                        <EditablePreview/>
-                        <EditableTextarea/>
-                    </Editable>
+                        <Editable
+                            placeholder={"Post Title"}
+                            fontSize={"2xl"}
+                            fontWeight={"bold"}
+                            borderWidth={2}
+                            borderColor={colors.hex.light}
+                            p={2}
+                            borderRadius={8}
+                            value={post.title}
+                            onChange={(nextValue) => {
+                                setPost(prevState => ({
+                                    ...prevState,
+                                    title: nextValue
+                                }))
+                            }}
+                        >
+                            <EditablePreview/>
+                            <EditableInput/>
+                        </Editable>
+                        <Editable
+                            placeholder={"Put your content here"}
+                            bgColor={colors.hex.light}
+                            minH={"250px"}
+                            p={2}
+                            borderRadius={8}
+                            value={post.content}
+                            onChange={(nextValue) => {
+                                setPost(prevState => ({
+                                    ...prevState,
+                                    content: nextValue
+                                }))
+                            }}
+                        >
+                            <EditablePreview/>
+                            <EditableTextarea minH={"250px"}/>
+                        </Editable>
+                    </Flex>
                 </ModalBody>
                 <ModalFooter
                     justifyContent={"end"}
@@ -33,12 +77,36 @@ const PostEditorModal = ({disclosure}) => {
                     gap={2}
                     w={"100%"}
                 >
-                    <Button colorScheme={"pink"} onClick={() => {
+                    <Button onClick={() => {
                         disclosure.onClose()
                     }}>
                         Cancel
                     </Button>
-                    <Button>
+                    <Button bgColor={colors.hex.light}
+                        onClick={()=> {
+                            sendPost(post).then(res => {
+                                toast({
+                                    title: "Posted successfully",
+                                    status: "success",
+                                    duration: 3000,
+                                    isClosable: true
+                                });
+                                setPosts(prevState => ([
+                                    res.data,
+                                    ...prevState
+                                ]))
+                                disclosure.onClose();
+                            }).catch(e => {
+                                toast({
+                                    title: "An error occurred",
+                                    description: e.response.data.message,
+                                    status: "error",
+                                    duration: 3000,
+                                    isClosable: true
+                                })
+                            })
+                        }}
+                    >
                         Submit
                     </Button>
                 </ModalFooter>
